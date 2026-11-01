@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     database_url: str = ""
     test_database_url: str = ""
     allowed_origins: str = ""
+    internal_api_key: str = ""
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.1-flash-lite"
     discord_webhook_url: str = ""
@@ -29,6 +30,10 @@ class Settings(BaseSettings):
     @property
     def sqlalchemy_url(self) -> str:
         return to_sqlalchemy_url(self.database_url)
+
+    @property
+    def origins_list(self) -> list[str]:
+        return [o.strip().rstrip("/") for o in self.allowed_origins.split(",") if o.strip()]
 
 
 settings = Settings()

@@ -36,16 +36,25 @@ def db(test_engine):
 
 @pytest.fixture()
 def client(db):
-    """FastAPI test client that uses the rolled-back test session."""
+    """Test client: uses the rolled-back session, a test API key, no rate limit."""
     from fastapi.testclient import TestClient
 
     from app.db import get_db
     from app.main import app
+    from app.security import limiter
 
     def override_get_db():
         yield db
 
+    old_key = settings.internal_api_key
+    settings.internal_api_key = "test-key"
+    limiter.enabled = False
+    limiter.reset()
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as c:
+        c.headers["X-API-Key"] = "test-key"
         yield c
     app.dependency_overrides.clear()
+    settings.internal_api_key = old_key
+    limiter.enabled = True
+    limiter.reset()
