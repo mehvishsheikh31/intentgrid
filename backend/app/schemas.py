@@ -129,3 +129,21 @@ class WorkflowResult(BaseModel):
     revision_count: int = Field(default=0, ge=0, le=2)
     llm_calls: int = Field(default=0, ge=0, le=8)
     error: str | None = None
+
+
+class TicketPage(BaseModel):
+    """Response of GET /api/tickets: one page of the inbox."""
+
+    items: list[TicketListItem]
+    total: int = Field(ge=0)
+    limit: int
+    offset: int
+
+
+class TicketPage(BaseModel):
+    """Response of GET /api/tickets: one page of the inbox."""
+
+    items: list[TicketListItem]
+    total: int = Field(ge=0)
+    limit: int
+    offset: int
