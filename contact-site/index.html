@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechNest - Laptops, phones and accessories</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold brand" href="index.html"><i class="bi bi-cpu-fill me-1"></i>TechNest</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item ms-lg-2"><a class="btn btn-brand btn-sm" href="contact.html">Contact support</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="hero">
+  <div class="container py-5">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <span class="badge rounded-pill text-bg-light mb-3">New season stock is in</span>
+        <h1 class="display-5 fw-bold">Laptops, phones and accessories you can trust.</h1>
+        <p class="lead opacity-90">Honest prices, genuine warranty and a support team that answers. Ask us anything about your order or your next gadget.</p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="products.html" class="btn btn-light btn-lg">Shop products</a>
+          <a href="contact.html" class="btn btn-outline-light btn-lg">Contact support</a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center d-none d-lg-block">
+        <i class="bi bi-laptop hero-icon"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="row g-3 feature-row">
+    <div class="col-md-4"><div class="feature"><i class="bi bi-truck"></i><div><div class="fw-semibold">Free shipping</div><div class="small text-secondary">On orders above &#8377;999. Delivery in 3 to 5 business days.</div></div></div></div>
+    <div class="col-md-4"><div class="feature"><i class="bi bi-arrow-repeat"></i><div><div class="fw-semibold">7-day returns</div><div class="small text-secondary">Unused items in original packaging.</div></div></div></div>
+    <div class="col-md-4"><div class="feature"><i class="bi bi-shield-check"></i><div><div class="fw-semibold">Genuine warranty</div><div class="small text-secondary">12 months on laptops and phones.</div></div></div></div>
+  </section>
+
+  <section class="mt-5">
+    <div class="d-flex justify-content-between align-items-end mb-3">
+      <h2 class="h3 mb-0">Featured products</h2>
+      <a href="products.html" class="link-brand">See all products</a>
+    </div>
+    <div class="row g-4" id="featured-products"></div>
+  </section>
+
+  <section class="support-strip mt-5">
+    <div class="row align-items-center gy-3">
+      <div class="col-md-8">
+        <h2 class="h4">Need help with an order?</h2>
+        <p class="mb-0 text-secondary">Send us a message. Our team replies within one business day. Support hours: Mon to Sat, 10:00 to 19:00 IST.</p>
+      </div>
+      <div class="col-md-4 text-md-end"><a href="contact.html" class="btn btn-brand btn-lg">Contact support</a></div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer mt-5">
+  <div class="container py-4">
+    <div class="row gy-3">
+      <div class="col-md-5">
+        <div class="fw-bold fs-5"><i class="bi bi-cpu-fill me-1"></i>TechNest</div>
+        <p class="small mb-0 opacity-75">A demo tech shop built for the IntentGrid project. All names, prices and contact details are invented.</p>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="fw-semibold mb-2">Pages</div>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="fw-semibold mb-2">Support hours</div>
+        <p class="small mb-0 opacity-75">Mon to Sat, 10:00 to 19:00 IST<br>Sunday closed</p>
+      </div>
+    </div>
+    <hr class="opacity-25">
+    <div class="small opacity-75">&copy; 2026 TechNest demo shop</div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/products.js"></script>
+</body>
+</html>
