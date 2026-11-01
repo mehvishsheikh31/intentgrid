@@ -43,8 +43,82 @@
     <div class="col-lg-7">
       <div class="card"><div class="card-body" id="form-area">
         <h2 class="h5">Send a message</h2>
-        <p class="text-secondary mb-0">The contact form is added in step 3.2.</p>
+
+        <div id="form-success" class="alert alert-success d-none" role="status" tabindex="-1">
+          <i class="bi bi-check-circle-fill me-1"></i>
+          <strong>Thank you!</strong> We got your message and will reply by email within one business day.
+        </div>
+        <div id="form-error" class="alert alert-danger d-none" role="alert" tabindex="-1">
+          <i class="bi bi-exclamation-triangle-fill me-1"></i>
+          <span id="form-error-text">Something went wrong. Please try again.</span>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="name" name="name" maxlength="120" autocomplete="name" required>
+              <div class="invalid-feedback" id="name-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="email" name="email" maxlength="254" autocomplete="email" required>
+              <div class="invalid-feedback" id="email-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone <span class="text-secondary small">(optional)</span></label>
+              <input type="tel" class="form-control" id="phone" name="phone" maxlength="30" autocomplete="tel">
+              <div class="invalid-feedback" id="phone-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label for="category" class="form-label">Inquiry type <span class="text-danger">*</span></label>
+              <select class="form-select" id="category" name="category" required>
+                <option value="">Choose one...</option>
+                <option value="complaint">Complaint</option>
+                <option value="refund_request">Refund request</option>
+                <option value="order_status">Order status</option>
+                <option value="product_inquiry">Product question</option>
+                <option value="pricing_quote">Pricing or quote</option>
+                <option value="appointment_booking">Book an appointment</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </select>
+              <div class="invalid-feedback" id="category-error"></div>
+            </div>
+            <div class="col-12">
+              <label for="subject" class="form-label">Subject <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="subject" name="subject" maxlength="200" required>
+              <div class="invalid-feedback" id="subject-error"></div>
+            </div>
+            <div class="col-12">
+              <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="message" name="message" rows="5" maxlength="2000" required></textarea>
+              <div class="d-flex justify-content-between">
+                <div class="invalid-feedback d-block" id="message-error"></div>
+                <div class="form-text ms-auto"><span id="message-count">0</span>/2000</div>
+              </div>
+            </div>
+
+            <!-- Honeypot: hidden from people, bots fill it. Do not remove. -->
+            <div class="visually-hidden" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-brand" id="submit-btn">
+                <span class="spinner-border spinner-border-sm me-1 d-none" id="submit-spinner" aria-hidden="true"></span>
+                <span id="submit-text">Send message</span>
+              </button>
+              <p class="small text-secondary mt-3 mb-0">
+                <i class="bi bi-shield-lock me-1"></i>Privacy note: we use your details only to answer this message.
+                This is a demo shop, so please do not enter real personal or payment information.
+              </p>
+            </div>
+          </div>
+        </form>
       </div></div>
+    </div>
     </div>
   </div>
 </main>
@@ -74,5 +148,7 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>
