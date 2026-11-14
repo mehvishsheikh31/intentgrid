@@ -1,6 +1,7 @@
 from typing import Literal, TypedDict
 
 from workflow.schemas import (
+    AnalysisResult,
     ComplianceResult,
     DraftResult,
     RiskResult,
@@ -22,6 +23,7 @@ class WorkflowState(TypedDict, total=False):
     redacted_message: str
     policy_text: str
     tone_guidelines: str
+    analysis: AnalysisResult | None
     understanding: UnderstandingResult | None
     risk: RiskResult | None
     priority_score: int | None
@@ -39,6 +41,7 @@ def new_state(ticket_id: int, max_revisions: int = 2) -> WorkflowState:
     """A clean starting state. The runner (step 4.8) fills in the ticket fields."""
     return WorkflowState(
         ticket_id=ticket_id,
+        analysis=None,
         understanding=None,
         risk=None,
         priority_score=None,
