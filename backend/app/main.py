@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 
 from app.config import settings
-from app.routers import contact, tickets
+from app.routers import contact, internal, reprocess, tickets
 from app.security import (
     limiter,
     rate_limit_handler,
@@ -26,6 +26,8 @@ app.add_middleware(
 
 app.include_router(contact.router)
 app.include_router(tickets.router, dependencies=[Depends(require_api_key)])
+app.include_router(reprocess.router, dependencies=[Depends(require_api_key)])
+app.include_router(internal.router, dependencies=[Depends(require_api_key)])
 
 
 @app.get("/api/health")

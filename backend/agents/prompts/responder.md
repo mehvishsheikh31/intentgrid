@@ -25,3 +25,7 @@ OUTPUT SHAPE
 - draft_reply: the full reply (greeting, body, sign-off).
 - policies_used: names of the policy sections you relied on (use the ## headings). Empty list if none.
 - open_items: facts the owner must confirm before sending. Empty list if none.
+
+FORMAT
+- Put the greeting, each short paragraph and the sign-off on separate lines with a blank line between them.
+- Check spelling and spaces between words before you answer.

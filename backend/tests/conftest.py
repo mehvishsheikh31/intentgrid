@@ -42,6 +42,7 @@ def client(db):
     from app.db import get_db
     from app.main import app
     from app.security import limiter
+    from app.workflow_trigger import get_workflow_starter
 
     def override_get_db():
         yield db
@@ -51,6 +52,7 @@ def client(db):
     limiter.enabled = False
     limiter.reset()
     app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[get_workflow_starter] = lambda: (lambda ticket_id, claimed=False: None)
     with TestClient(app) as c:
         c.headers["X-API-Key"] = "test-key"
         yield c
