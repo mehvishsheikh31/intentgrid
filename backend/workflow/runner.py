@@ -32,6 +32,7 @@ class WorkflowOutcome:
     revision_count: int = 0
     llm_calls: int = 0
     error: str | None = None
+    route: str | None = None
 
 
 def build_state(ticket, policy, max_revisions: int | None = None) -> WorkflowState:
@@ -110,6 +111,7 @@ def process_ticket(
         return WorkflowOutcome(
             ticket_id=ticket_id, status=status,
             revision_count=final.get("revision_count", 0), llm_calls=final.get("llm_calls", 0),
+            route=final.get("route"),
         )
     except Exception as exc:
         logger.exception("Workflow failed for ticket %s", ticket_id)

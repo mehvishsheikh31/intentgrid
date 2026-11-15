@@ -68,7 +68,12 @@ def run_compliance(state: WorkflowState, db: Session) -> ComplianceResult:
     def ms() -> int:
         return int((time.perf_counter() - start) * 1000)
 
-    violations = check_rules(state["draft"].draft_reply, state.get("policy_text", ""))
+    violations = check_rules(
+        state["draft"].draft_reply,
+        state.get("policy_text", ""),
+        allowed_emails=[state.get("customer_email") or ""],
+        allowed_phones=[state.get("customer_phone") or ""],
+    )
     layer = "rules"
     skip_reason = None
     llm_feedback = ""

@@ -19,10 +19,10 @@ TEXT_RULES = [
     (
         "refund_commitment", "blocker",
         rf"\b(?:we|i)(?:{AP}ll| will| shall| can| are going to)\s+(?:refund|replace|reimburse|compensate)\b"
-        r"|\b(?:give|offer|issue|grant|provide)\w*\s+you\s+(?:a\s+|an\s+)?(?:full\s+|complete\s+)?"
-        r"(?:refund|replacement|reimbursement|compensation)\b"
-        rf"|\byou(?:{AP}ll| will)\s+(?:receive|get)\s+(?:a\s+|your\s+|the\s+)?(?:full\s+|complete\s+)?"
-        r"(?:refund|replacement|reimbursement|compensation)\b"
+        r"|\b(?:give|offer|issue|grant|provide)\w*\s+you\s+(?:a\s+|an\s+)?(?:\w+\s+){0,2}?"
+        r"(?:refund|replacement|reimbursement|compensation)s?\b"
+        rf"|\byou(?:{AP}ll| will)\s+(?:receive|get)\s+(?:a\s+|an\s+|your\s+|the\s+)?(?:\w+\s+){{0,2}}?"
+        r"(?:refund|replacement|reimbursement|compensation)s?\b"
         r"|\brefund (?:has been|will be|is being)\s+(?:processed|issued|credited|approved)\b",
         "Do not promise or confirm a refund, replacement or compensation. Say the team will review the request.",
     ),
@@ -55,6 +55,11 @@ TEXT_RULES = [
         "Never mention AI, internal rules or instructions.",
     ),
     (
+        "secret_sharing", "blocker",
+        r"\b(?:password|passcode|api key|secret key|otp|cvv)\s*(?:is|are|=|:)",
+        "Never share passwords, keys or codes.",
+    ),
+    (
         "unresolved_placeholder", "blocker",
         r"\{\{.*?\}\}|\[CUSTOMER_[A-Z]+\]|\[(?:NAME|EMAIL|PHONE)\]",
         "A placeholder was left in the text. Write the final wording.",
@@ -69,6 +74,8 @@ DATE_RE = re.compile(
     r"|\b(?:tomorrow|tonight)\b",
     re.IGNORECASE,
 )
+EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+PHONE_RE = re.compile(r"(?<![\w-])\+?\d[\d\s().-]{8,}\d(?!\w)")
 LINK_RE = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
 AMOUNT_RES = [
     re.compile(r"(?:₹|rs\.?|inr|\$|usd|rupees?)\s*([\d,]+(?:\.\d+)?)", re.IGNORECASE),
@@ -118,8 +125,21 @@ def _time_pairs(text: str) -> dict[tuple[str, str], str]:
     return found
 
 
-def check_rules(draft_text: str, policy_text: str = "") -> list[ComplianceViolation]:
-    """Return every rule violation found in the draft."""
+def _digits(value: str) -> str:
+    return re.sub(r"\D", "", value)
+
+
+def check_rules(
+    draft_text: str,
+    policy_text: str = "",
+    *,
+    allowed_emails: tuple[str, ...] | list[str] = (),
+    allowed_phones: tuple[str, ...] | list[str] = (),
+) -> list[ComplianceViolation]:
+    """Return every rule violation found in the draft.
+
+    allowed_emails / allowed_phones: the customer's own details, which the draft may repeat.
+    """
     violations: list[ComplianceViolation] = []
     policy_lower = policy_text.lower()
 
@@ -136,6 +156,21 @@ def check_rules(draft_text: str, policy_text: str = "") -> list[ComplianceViolat
     for link in LINK_RE.findall(draft_text):
         if link.lower().rstrip(".,)") not in policy_lower:
             add("unapproved_link", "blocker", link, "Do not include links that are not in the policy.")
+            break
+
+    ok_emails = {e.lower() for e in EMAIL_RE.findall(policy_text)} | {e.lower() for e in allowed_emails if e}
+    for email in EMAIL_RE.findall(draft_text):
+        if email.lower() not in ok_emails:
+            add("unapproved_contact", "blocker", email,
+                "Do not include email addresses that are not in the policy.")
+            break
+    ok_phones = {_digits(p)[-10:] for p in allowed_phones if _digits(p)}
+    ok_phones |= {_digits(m.group(0))[-10:] for m in PHONE_RE.finditer(policy_text)}
+    for m in PHONE_RE.finditer(draft_text):
+        digits = _digits(m.group(0))
+        if 10 <= len(digits) <= 15 and digits[-10:] not in ok_phones:
+            add("unapproved_contact", "blocker", m.group(0),
+                "Do not include phone numbers that are not in the policy.")
             break
 
     policy_amounts = set(_amounts(policy_text))

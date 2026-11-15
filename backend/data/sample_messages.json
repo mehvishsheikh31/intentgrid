@@ -1,0 +1,166 @@
+[
+  {
+    "id": 1,
+    "label": "order_status_with_number",
+    "name": "Rahul Sharma",
+    "email": "rahul.sharma@example.com",
+    "phone": "+91 98765 43210",
+    "category": "other",
+    "subject": "Where is my order 1042",
+    "message": "Hi, I placed order 1042 five days ago for the Zenith X1 and I have not received any update. Where is it?",
+    "expected_categories": [
+      "order_status"
+    ]
+  },
+  {
+    "id": 2,
+    "label": "order_status_no_number",
+    "name": "Priya Nair",
+    "email": "priya.nair@example.com",
+    "phone": null,
+    "category": "other",
+    "subject": "Has my laptop shipped",
+    "message": "Hello, I ordered a laptop last week. Has it shipped yet? I did not get any tracking message.",
+    "expected_categories": [
+      "order_status"
+    ]
+  },
+  {
+    "id": 3,
+    "label": "product_question",
+    "name": "Amit Verma",
+    "email": "amit.verma@example.com",
+    "phone": "9812345678",
+    "category": "product_inquiry",
+    "subject": "AeroBook 14 specs",
+    "message": "Does the AeroBook 14 come with 16 GB RAM, and what is the price?",
+    "expected_categories": [
+      "product_inquiry",
+      "pricing_quote"
+    ]
+  },
+  {
+    "id": 4,
+    "label": "student_discount",
+    "name": "Sneha Iyer",
+    "email": "sneha.iyer@example.com",
+    "phone": null,
+    "category": "pricing_quote",
+    "subject": "Student discount",
+    "message": "I am a college student. Is there any discount on the CampusLite 15? What would the final price be?",
+    "expected_categories": [
+      "pricing_quote",
+      "product_inquiry"
+    ]
+  },
+  {
+    "id": 5,
+    "label": "warranty_claim",
+    "name": "Karan Mehta",
+    "email": "karan.mehta@example.com",
+    "phone": "+91 99887 76655",
+    "category": "complaint",
+    "subject": "Screen lines after 8 months",
+    "message": "The screen of my Zenith X1 has started showing coloured lines after 8 months. Is this covered under warranty and what should I do?",
+    "expected_categories": [
+      "complaint",
+      "other",
+      "product_inquiry"
+    ]
+  },
+  {
+    "id": 6,
+    "label": "return_request",
+    "name": "Fatima Khan",
+    "email": "fatima.khan@example.com",
+    "phone": null,
+    "category": "refund_request",
+    "subject": "Return SoundBud Air",
+    "message": "I bought SoundBud Air earbuds 3 days ago. The box is opened but they are unused. Can I return them and get my money back?",
+    "expected_categories": [
+      "refund_request"
+    ]
+  },
+  {
+    "id": 7,
+    "label": "angry_refund_threat",
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "9001122334",
+    "category": "complaint",
+    "subject": "Laptop dead after 3 days",
+    "message": "My AeroBook 14 stopped working after only 3 days. This is the worst service ever. Refund me today or I will do a chargeback and tell everyone.",
+    "expected_categories": [
+      "refund_request",
+      "complaint"
+    ]
+  },
+  {
+    "id": 8,
+    "label": "safety_battery",
+    "name": "Anjali Rao",
+    "email": "anjali.rao@example.com",
+    "phone": null,
+    "category": "complaint",
+    "subject": "PowerBrick very hot",
+    "message": "My PowerBrick 20000 became very hot while charging and the case looks swollen. I am scared to use it. What should I do?",
+    "expected_categories": [
+      "complaint",
+      "other"
+    ]
+  },
+  {
+    "id": 9,
+    "label": "positive_feedback",
+    "name": "Deepak Joshi",
+    "email": "deepak.joshi@example.com",
+    "phone": null,
+    "category": "feedback",
+    "subject": "Thank you",
+    "message": "Just wanted to say the SoundBud Air earbuds I bought are great. Delivery was quick and the support team was helpful. Thanks!",
+    "expected_categories": [
+      "feedback"
+    ]
+  },
+  {
+    "id": 10,
+    "label": "store_visit",
+    "name": "Meera Pillai",
+    "email": "meera.pillai@example.com",
+    "phone": "9876501234",
+    "category": "appointment_booking",
+    "subject": "Visit on Saturday",
+    "message": "Can I visit your store on Saturday afternoon to see the AeroBook Pro 16 before buying? Do I need an appointment?",
+    "expected_categories": [
+      "appointment_booking",
+      "product_inquiry",
+      "other"
+    ]
+  },
+  {
+    "id": 11,
+    "label": "spam_prize_precheck",
+    "name": "Promo Desk",
+    "email": "promo.desk@example.net",
+    "phone": null,
+    "category": "other",
+    "subject": "You won",
+    "message": "CONGRATULATIONS!!! You won 1,000,000 dollars. Click http://bit.ly/free-prize now to claim your free iPhone.",
+    "expected_categories": [
+      "spam"
+    ]
+  },
+  {
+    "id": 12,
+    "label": "spam_seo_offer",
+    "name": "Growth Agency",
+    "email": "hello@growth-agency.example.net",
+    "phone": null,
+    "category": "other",
+    "subject": "Grow your website",
+    "message": "Hello dear owner, I am an SEO expert. I can bring your shop website to the first page of Google for just 99 dollars. Reply YES and I will send my portfolio.",
+    "expected_categories": [
+      "spam"
+    ]
+  }
+]
