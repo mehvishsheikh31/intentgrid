@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from sqlalchemy.orm import Session
 
 from app.config import settings
+from integrations.discord import maybe_alert
 from repositories import policies as policy_repo
 from repositories import tickets as ticket_repo
 from repositories import workflow as workflow_repo
@@ -108,6 +109,7 @@ def process_ticket(
         if status not in ("awaiting_approval", "needs_manual_reply"):
             status = "workflow_failed"
         workflow_repo.save_workflow_result(db, ticket_id, status, ticket_fields(final), business_id)
+        maybe_alert(db, ticket_id, business_id)  # never raises; the ticket is already saved
         return WorkflowOutcome(
             ticket_id=ticket_id, status=status,
             revision_count=final.get("revision_count", 0), llm_calls=final.get("llm_calls", 0),

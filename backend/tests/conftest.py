@@ -60,3 +60,9 @@ def client(db):
     settings.internal_api_key = old_key
     limiter.enabled = True
     limiter.reset()
+
+
+@pytest.fixture(autouse=True)
+def no_real_discord(monkeypatch):
+    """Tests must never post to the real Discord channel."""
+    monkeypatch.setattr(settings, "discord_webhook_url", "")

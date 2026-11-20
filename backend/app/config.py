@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.1-flash-lite"
     discord_webhook_url: str = ""
+    dashboard_url: str = ""
     max_revisions: int = 2
 
     @property
